@@ -212,3 +212,73 @@ h1#magnetic-title {
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+
+/* Discord Button Orbiting */
+#discord-btn-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 10001;
+  pointer-events: auto;
+}
+
+#discord-btn {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px #fff3;
+  transition: box-shadow 0.2s;
+}
+
+#discord-btn:active {
+  box-shadow: 0 1px 4px #fff2;
+}
+
+.discord-logo-box {
+  background: white;
+  border-radius: 16px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  box-sizing: border-box;
+}
+
+.discord-logo {
+  width: 32px;
+  height: 32px;
+  display: block;
+  filter: drop-shadow(0 0 2px #fff);
+  animation: spinLogo 2s linear infinite;
+}
+
+@keyframes spinLogo {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+
+#discord-copied {
+  position: fixed;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  background: #fff;
+  color: #222;
+  padding: 8px 20px;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s;
+  z-index: 10002;
+}
+
+#discord-copied.visible {
+  opacity: 1;
+}
