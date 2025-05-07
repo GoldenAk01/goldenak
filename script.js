@@ -1,27 +1,22 @@
-// Show default cursor and hide crosshair while overlay is up
-document.body.classList.add('overlay-active');
-document.querySelector('.crosshair-container').classList.add('hidden');
+// No need to hide crosshair or show default cursor on load since crosshair is always visible
 
 // Overlay click to start music and fade out overlay/blur/text
 document.getElementById('overlay').addEventListener('click', function() {
   const audio = document.getElementById('bg-music');
 
-  // Try to play music on user interaction
+  // Play music on user interaction
   audio.loop = true;
   audio.play().catch((e) => {
-    // If there's an error, log it (for debugging)
     console.log("Audio play failed:", e);
   });
 
-  // Start fade out
+  // Start fade out overlay
   this.classList.add('fading');
 
-  // After transition, hide overlay, show crosshair, hide default cursor
+  // After fade out, hide overlay
   setTimeout(() => {
     this.style.display = 'none';
-    document.body.classList.remove('overlay-active');
-    document.querySelector('.crosshair-container').classList.remove('hidden');
-  }, 700); // Match the CSS transition duration
+  }, 700); // Match CSS transition duration
 });
 
 // Snowflake creation function
