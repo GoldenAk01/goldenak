@@ -14,8 +14,6 @@ body {
   cursor: none; /* Hide default cursor always */
 }
 
-/* Remove cursor hiding logic since crosshair is always visible */
-
 /* Overlay with smooth fade and blur */
 #overlay {
   position: fixed;
