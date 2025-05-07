@@ -1,9 +1,15 @@
-// Overlay click to start music
+// Overlay click to start music and remove blur
 document.getElementById('overlay').addEventListener('click', function() {
   const audio = document.getElementById('bg-music');
   audio.loop = true;
   audio.play();
+
+  // Hide overlay
   this.style.display = 'none';
+
+  // Remove blur from page content
+  const pageContent = document.getElementById('page-content');
+  pageContent.classList.remove('blur');
 });
 
 // SNOWFLAKE FUNCTION
