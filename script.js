@@ -24,15 +24,13 @@ function createSnowflake() {
 // Create new snowflakes every 100ms
 setInterval(createSnowflake, 100);
 
-// Smooth pink mouse trail
-document.addEventListener("mousemove", (e) => {
-  const trail = document.createElement("div");
-  trail.classList.add("mouse-trail");
-  trail.style.left = e.pageX + "px";
-  trail.style.top = e.pageY + "px";
-  document.body.appendChild(trail);
+// Create crosshair element
+const crosshair = document.createElement("div");
+crosshair.classList.add("crosshair");
+document.body.appendChild(crosshair);
 
-  setTimeout(() => {
-    trail.remove();
-  }, 1000);
+// Update crosshair position on mouse move
+document.addEventListener("mousemove", (e) => {
+  crosshair.style.left = `${e.pageX}px`;
+  crosshair.style.top = `${e.pageY}px`;
 });
