@@ -5,7 +5,7 @@ document.getElementById('overlay').addEventListener('click', function() {
 
   // Play audio, then set volume for best compatibility
   audio.play().then(() => {
-    audio.volume = 0.2; // Set volume after playback starts
+    audio.volume = 0; // Set volume after playback starts
   }).catch((e) => {
     // If there's an error, log it (for debugging)
     console.log("Audio play failed:", e);
