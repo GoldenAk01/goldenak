@@ -69,8 +69,8 @@ const magneticTitleElem = document.getElementById('magnetic-title');
 
 function animateOrbit() {
   const now = Date.now() / 1000;
-  const orbitRadius = 270; // Even bigger orbit!
-  const orbitSpeed = 0.07; // Really slow rotations per second
+  const orbitRadius = 300; // Even bigger orbit!
+  const orbitSpeed = 0.01; // Really slow rotations per second
   const angle = now * orbitSpeed * 2 * Math.PI;
 
   // Center position (between pfp and title)
