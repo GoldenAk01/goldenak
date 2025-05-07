@@ -254,7 +254,7 @@ h1#magnetic-title {
   height: 32px;
   display: block;
   filter: drop-shadow(0 0 2px #fff);
-  animation: spinLogo 2s linear infinite;
+  animation: spinLogo 5s linear infinite;
 }
 
 @keyframes spinLogo {
@@ -282,3 +282,4 @@ h1#magnetic-title {
 #discord-copied.visible {
   opacity: 1;
 }
+
