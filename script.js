@@ -1,45 +1,54 @@
-// Snowflake function
+// SNOWFLAKE FUNCTION
 function createSnowflake() {
-  const snowflake = document.createElement("div");
-  snowflake.classList.add("snowflake");
-
-  // Random initial horizontal position
-  snowflake.style.left = Math.random() * window.innerWidth + "px";
-  // Random size
-  const size = Math.random() * 4 + 2;
-  snowflake.style.width = size + "px";
-  snowflake.style.height = size + "px";
-  // Random fall duration
-  const duration = Math.random() * 5 + 5;
-  snowflake.style.animationDuration = duration + "s";
-
-  document.body.appendChild(snowflake);
-
-  // Remove the snowflake after it falls
-  setTimeout(() => {
-    snowflake.remove();
-  }, duration * 1000);
+    const snowflake = document.createElement("div");
+    snowflake.classList.add("snowflake");
+  
+    // Random initial horizontal position
+    snowflake.style.left = Math.random() * window.innerWidth + "px";
+    // Random size
+    const size = Math.random() * 4 + 2;
+    snowflake.style.width = size + "px";
+    snowflake.style.height = size + "px";
+    // Random fall duration
+    const duration = Math.random() * 5 + 5;
+    snowflake.style.animationDuration = duration + "s";
+  
+    document.body.appendChild(snowflake);
+  
+    // Remove the snowflake after it falls
+    setTimeout(() => {
+      snowflake.remove();
+    }, duration * 1000);
 }
-
+  
 // Create new snowflakes every 100ms
 setInterval(createSnowflake, 100);
 
-// Create crosshair element with the image
-const crosshair = document.createElement("div");
-crosshair.classList.add("crosshair");
-
-// Create image element for crosshair
-const crosshairImg = document.createElement("img");
-crosshairImg.src = "/mnt/data/48002c1d-96e1-4e38-90b4-e02f8063d7e6.png";  // Use your image here
-crosshair.appendChild(crosshairImg);
-document.body.appendChild(crosshair);
-
-// Update crosshair position and rotation on mouse move
-document.addEventListener("mousemove", (e) => {
-  crosshair.style.left = `${e.pageX}px`;
-  crosshair.style.top = `${e.pageY}px`;
-
-  // Rotate the crosshair slightly based on the mouse movement
-  const angle = (e.clientX + e.clientY) % 360; // Simple rotation effect based on mouse position
-  crosshair.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+// Crosshair follows mouse
+const crosshair = document.querySelector('.crosshair-container');
+document.addEventListener('mousemove', (e) => {
+  crosshair.style.left = (e.clientX - 30) + 'px'; // Center the crosshair (60px/2)
+  crosshair.style.top = (e.clientY - 30) + 'px';
 });
+
+// Magnetic title effect
+const magneticTitle = document.getElementById('magnetic-title');
+document.addEventListener('mousemove', (e) => {
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+  const maxDist = 60;
+  const dx = (e.clientX - centerX) / centerX;
+  const dy = (e.clientY - centerY) / centerY;
+  magneticTitle.style.transform = `translate(-50%, -50%) translate(${dx * maxDist}px, ${dy * maxDist}px)`;
+});
+
+// On mouse leave, reset the title position
+document.addEventListener('mouseleave', () => {
+  magneticTitle.style.transform = 'translate(-50%, -50%)';
+});
+
+// Fallback for broken image
+const pfp = document.getElementById('pfp');
+pfp.onerror = () => {
+  pfp.src = 'https://i.pravatar.cc/150';
+};
