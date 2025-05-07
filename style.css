@@ -6,12 +6,12 @@ body {
   font-family: Arial, sans-serif;
   height: 100vh;
   overflow: hidden;
+  position: relative;
+  cursor: none;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  position: relative;
-  cursor: none;
 }
 
 .pfp-container {
@@ -29,35 +29,35 @@ body {
   object-fit: cover;
   border: 4px solid white;
   box-shadow: 0 0 16px #fff8;
-  display: block;
   background: #222;
+  display: block;
 }
 
 #overlay {
   position: fixed;
   z-index: 99999;
-  left: 0; top: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.92);
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.92);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 #overlay-content {
-  color: #fff;
-  background: rgba(30,30,30,0.95);
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: white;
+  background: rgba(30, 30, 30, 0.95);
   padding: 40px 60px;
   border-radius: 18px;
   box-shadow: 0 0 40px #000a;
-  font-size: 2.5rem; /* increased font size */
-  font-weight: 600;
   cursor: pointer;
   text-align: center;
   transition: background 0.2s;
 }
 
 #overlay-content:hover {
-  background: rgba(50,50,50,1);
+  background: rgba(50, 50, 50, 1);
 }
 
 audio {
@@ -66,13 +66,12 @@ audio {
 
 h1#magnetic-title {
   font-size: 4rem;
-  z-index: 1;
-  color: white;
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
+  color: white;
+  z-index: 1;
   transform: translate(-50%, -50%);
-  transition: transform 0.15s cubic-bezier(.22,1,.36,1);
   pointer-events: none;
   text-shadow:
     0 0 8px #fff,
@@ -80,10 +79,11 @@ h1#magnetic-title {
     0 0 24px #fff3,
     0 0 32px #fff2;
   animation: glowPulse 2s infinite alternate;
+  transition: transform 0.15s cubic-bezier(.22,1,.36,1);
 }
 
 @keyframes glowPulse {
-  0% {
+  0%, 100% {
     text-shadow:
       0 0 6px #fff,
       0 0 12px #fff,
@@ -96,13 +96,6 @@ h1#magnetic-title {
       0 0 28px #fff,
       0 0 40px #fff5,
       0 0 56px #fff3;
-  }
-  100% {
-    text-shadow:
-      0 0 6px #fff,
-      0 0 12px #fff,
-      0 0 18px #fff3,
-      0 0 24px #fff2;
   }
 }
 
@@ -126,30 +119,30 @@ h1#magnetic-title {
 
 .crosshair-container {
   position: fixed;
-  left: 0;
   top: 0;
-  pointer-events: none;
-  z-index: 10000;
+  left: 0;
   width: 60px;
   height: 60px;
+  pointer-events: none;
+  z-index: 10000;
 }
 
 .crosshair-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 10px;
   height: 10px;
   background: white;
   border-radius: 50%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 0 0 8px 2px white;
 }
 
 .crosshair-rotating {
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
   width: 60px;
   height: 60px;
   transform: translate(-50%, -50%);
@@ -167,7 +160,6 @@ h1#magnetic-title {
   --gap: 8px;
   --line-length: 18px;
   --line-thickness: 4px;
-  --container-size: 60px;
 }
 
 .crosshair-line.top {
@@ -198,13 +190,14 @@ h1#magnetic-title {
   top: 50%;
   transform: translateY(-50%);
 }
+
 @keyframes spin {
   to {
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
-/* Blur effect on page content when overlay is visible */
+/* Blur effect on page content */
 #page-content.blur {
   filter: blur(5px);
   transition: filter 0.3s ease;
