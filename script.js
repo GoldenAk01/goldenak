@@ -1,4 +1,3 @@
-// Get the audio element once
 const audio = document.getElementById('bg-music');
 
 // Always enforce 30% volume
@@ -6,7 +5,7 @@ function setVolume() {
   audio.volume = 0.3;
 }
 
-// Set volume before playback (just in case)
+// Set volume before playback (for good measure)
 setVolume();
 
 // Also set volume after playback starts (for browser compatibility)
