@@ -49,3 +49,43 @@ document.addEventListener('mousemove', (e) => {
 document.addEventListener('mouseleave', () => {
   magneticTitle.style.transform = 'translate(-50%, -50%)';
 });
+
+// Discord button copy functionality
+document.getElementById('discord-btn').addEventListener('click', function() {
+  const discordName = "goldenak";
+  navigator.clipboard.writeText(discordName).then(() => {
+    const copied = document.getElementById('discord-copied');
+    copied.classList.add('visible');
+    setTimeout(() => {
+      copied.classList.remove('visible');
+    }, 1500);
+  });
+});
+
+// Orbit animation for Discord button
+const discordBtnContainer = document.getElementById('discord-btn-container');
+const pfpContainer = document.querySelector('.pfp-container');
+const magneticTitleElem = document.getElementById('magnetic-title');
+
+function animateOrbit() {
+  const now = Date.now() / 1000;
+  const orbitRadius = 120;
+  const orbitSpeed = 0.35; // rotations per second
+  const angle = now * orbitSpeed * 2 * Math.PI;
+
+  // Center position (between pfp and title)
+  const pfpRect = pfpContainer.getBoundingClientRect();
+  const titleRect = magneticTitleElem.getBoundingClientRect();
+  const centerX = (pfpRect.left + titleRect.left + pfpRect.width/2 + titleRect.width/2) / 2 + window.scrollX;
+  const centerY = (pfpRect.top + titleRect.top + pfpRect.height/2 + titleRect.height/2) / 2 + window.scrollY;
+
+  // Orbit position
+  const x = centerX + orbitRadius * Math.cos(angle) - discordBtnContainer.offsetWidth/2;
+  const y = centerY + orbitRadius * Math.sin(angle) - discordBtnContainer.offsetHeight/2;
+
+  discordBtnContainer.style.left = `${x}px`;
+  discordBtnContainer.style.top = `${y}px`;
+
+  requestAnimationFrame(animateOrbit);
+}
+animateOrbit();
