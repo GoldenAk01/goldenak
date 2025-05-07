@@ -24,12 +24,11 @@ function createSnowflake() {
 // Create new snowflakes every 100ms
 setInterval(createSnowflake, 100);
 
-// Create crosshair element
+// 🎯 Create and move custom crosshair
 const crosshair = document.createElement("div");
 crosshair.classList.add("crosshair");
 document.body.appendChild(crosshair);
 
-// Update crosshair position on mouse move
 document.addEventListener("mousemove", (e) => {
   crosshair.style.left = `${e.pageX}px`;
   crosshair.style.top = `${e.pageY}px`;
