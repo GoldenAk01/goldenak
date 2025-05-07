@@ -7,11 +7,18 @@ body {
   height: 100vh;
   overflow: hidden;
   position: relative;
-  cursor: none;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+/* Hide custom crosshair and show default cursor when overlay is up */
+body.overlay-active {
+  cursor: default;
+}
+body:not(.overlay-active) {
+  cursor: none;
 }
 
 .pfp-container {
@@ -48,7 +55,18 @@ body {
   font-size: 2.5rem;
   font-weight: 600;
   color: white;
+  background: #111;
+  padding: 32px 64px;
+  border-radius: 20px;
+  box-shadow: 0 0 32px #000b;
   user-select: none;
+  border: 2px solid #fff2;
+  transition: background 0.2s, border 0.2s;
+}
+
+#overlay-content:hover {
+  background: #222;
+  border: 2px solid #fff;
 }
 
 audio {
@@ -115,7 +133,7 @@ h1#magnetic-title {
   width: 60px;
   height: 60px;
   pointer-events: none;
-  z-index: 100000; /* higher than overlay */
+  z-index: 100000;
 }
 
 .crosshair-dot {
@@ -192,4 +210,9 @@ h1#magnetic-title {
 #page-content.blur {
   filter: blur(5px);
   transition: filter 0.3s ease;
+}
+
+/* Hide crosshair when .hidden is on it */
+.crosshair-container.hidden {
+  display: none;
 }
