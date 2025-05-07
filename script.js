@@ -1,4 +1,8 @@
-// Overlay click to start music and remove blur
+// Show default cursor and hide crosshair while overlay is up
+document.body.classList.add('overlay-active');
+document.querySelector('.crosshair-container').classList.add('hidden');
+
+// Overlay click to start music and remove blur/cursor
 document.getElementById('overlay').addEventListener('click', function() {
   const audio = document.getElementById('bg-music');
   audio.loop = true;
@@ -10,6 +14,10 @@ document.getElementById('overlay').addEventListener('click', function() {
   // Remove blur from page content
   const pageContent = document.getElementById('page-content');
   pageContent.classList.remove('blur');
+
+  // Hide default cursor, show crosshair
+  document.body.classList.remove('overlay-active');
+  document.querySelector('.crosshair-container').classList.remove('hidden');
 });
 
 // Snowflake creation function
@@ -49,3 +57,4 @@ document.addEventListener('mousemove', (e) => {
 document.addEventListener('mouseleave', () => {
   magneticTitle.style.transform = 'translate(-50%, -50%)';
 });
+
