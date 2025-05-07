@@ -62,15 +62,15 @@ document.getElementById('discord-btn').addEventListener('click', function() {
   });
 });
 
-// Orbit animation for Discord button
+// Orbit animation for Discord button (bigger orbit)
 const discordBtnContainer = document.getElementById('discord-btn-container');
 const pfpContainer = document.querySelector('.pfp-container');
 const magneticTitleElem = document.getElementById('magnetic-title');
 
 function animateOrbit() {
   const now = Date.now() / 1000;
-  const orbitRadius = 200; // Bigger orbit!
-  const orbitSpeed = 0.35; // rotations per second
+  const orbitRadius = 270; // Even bigger orbit!
+  const orbitSpeed = 0.07; // Really slow rotations per second
   const angle = now * orbitSpeed * 2 * Math.PI;
 
   // Center position (between pfp and title)
