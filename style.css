@@ -33,16 +33,34 @@ body {
   background: #222;
 }
 
+#overlay {
+  position: fixed;
+  z-index: 99999;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.92);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#overlay-content {
+  color: #fff;
+  background: rgba(30,30,30,0.95);
+  padding: 40px 60px;
+  border-radius: 18px;
+  box-shadow: 0 0 40px #000a;
+  font-size: 2rem;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+#overlay-content:hover {
+  background: rgba(50,50,50,1);
+}
+
 audio {
-  position: absolute;
-  left: 50%;
-  top: 38%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-  width: 250px;
-  background: #222;
-  border-radius: 8px;
-  outline: none;
+  display: none;
 }
 
 h1#magnetic-title {
