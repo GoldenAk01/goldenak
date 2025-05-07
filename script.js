@@ -1,22 +1,8 @@
-const audio = document.getElementById('bg-music');
-
-// Always enforce 5% volume
-function setVolume() {
-  audio.volume = 0.05;
-}
-
-// Set volume before playback (for good measure)
-setVolume();
-
-// Also set volume after playback starts (for browser compatibility)
-audio.addEventListener('play', setVolume);
-
 // Overlay click to start music and fade out overlay/blur/text
 document.getElementById('overlay').addEventListener('click', function() {
+  const audio = document.getElementById('bg-music');
   audio.loop = true;
-  audio.play().then(() => {
-    setVolume(); // Set volume again after playback starts
-  }).catch((e) => {
+  audio.play().catch((e) => {
     console.log("Audio play failed:", e);
   });
 
