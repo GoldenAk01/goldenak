@@ -2,22 +2,21 @@
 document.body.classList.add('overlay-active');
 document.querySelector('.crosshair-container').classList.add('hidden');
 
-// Overlay click to start music and remove blur/cursor
+// Overlay click to start music and fade out overlay/blur/text
 document.getElementById('overlay').addEventListener('click', function() {
   const audio = document.getElementById('bg-music');
   audio.loop = true;
   audio.play();
 
-  // Hide overlay
-  this.style.display = 'none';
+  // Start fade out
+  this.classList.add('fading');
 
-  // Remove blur from page content
-  const pageContent = document.getElementById('page-content');
-  pageContent.classList.remove('blur');
-
-  // Hide default cursor, show crosshair
-  document.body.classList.remove('overlay-active');
-  document.querySelector('.crosshair-container').classList.remove('hidden');
+  // After transition, hide overlay, show crosshair, hide default cursor
+  setTimeout(() => {
+    this.style.display = 'none';
+    document.body.classList.remove('overlay-active');
+    document.querySelector('.crosshair-container').classList.remove('hidden');
+  }, 700); // Match the CSS transition duration
 });
 
 // Snowflake creation function
@@ -57,4 +56,3 @@ document.addEventListener('mousemove', (e) => {
 document.addEventListener('mouseleave', () => {
   magneticTitle.style.transform = 'translate(-50%, -50%)';
 });
-
