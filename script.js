@@ -5,8 +5,13 @@ document.querySelector('.crosshair-container').classList.add('hidden');
 // Overlay click to start music and fade out overlay/blur/text
 document.getElementById('overlay').addEventListener('click', function() {
   const audio = document.getElementById('bg-music');
+
+  // Try to play music on user interaction
   audio.loop = true;
-  audio.play();
+  audio.play().catch((e) => {
+    // If there's an error, log it (for debugging)
+    console.log("Audio play failed:", e);
+  });
 
   // Start fade out
   this.classList.add('fading');
