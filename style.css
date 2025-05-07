@@ -36,7 +36,7 @@ h1 {
   }
 }
 
-/* 🎯 Crosshair container */
+/* 🎯 Crosshair container (positioning) */
 .crosshair {
   position: absolute;
   width: 40px;
@@ -46,53 +46,21 @@ h1 {
   transform: translate(-50%, -50%);
 }
 
-/* ✳️ Center dot */
-.crosshair::before {
-  content: '';
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background-color: white;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-}
-
-/* ➕ Rotating cross */
-.crosshair::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 30px;
-  height: 30px;
-  transform: translate(-50%, -50%);
-  animation: spin 4s linear infinite;
-  z-index: 1;
-}
-
-.crosshair::after {
-  background-image: linear-gradient(
-      hotpink 2px, transparent 2px
-    ),
-    linear-gradient(
-      90deg,
-      hotpink 2px,
-      transparent 2px
-    );
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  opacity: 0.6;
+/* 🎯 Add the crosshair image */
+.crosshair img {
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+  transition: transform 0.1s ease-out;
 }
 
 /* 🔁 Spin animation */
 @keyframes spin {
   0% {
-    transform: translate(-50%, -50%) rotate(0deg);
+    transform: rotate(0deg);
   }
   100% {
-    transform: translate(-50%, -50%) rotate(360deg);
+    transform: rotate(360deg);
   }
 }
+
