@@ -6,13 +6,11 @@ document.getElementById('overlay').addEventListener('click', function() {
     console.log("Audio play failed:", e);
   });
 
-  // Start fade out overlay
   this.classList.add('fading');
 
-  // After fade out, hide overlay
   setTimeout(() => {
     this.style.display = 'none';
-  }, 700); // Match CSS transition duration
+  }, 700);
 });
 
 // Snowflake creation function
