@@ -41,23 +41,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 #overlay-content {
   font-size: 2.5rem;
   font-weight: 600;
   color: white;
-  background: rgba(30, 30, 30, 0.95);
-  padding: 40px 60px;
-  border-radius: 18px;
-  box-shadow: 0 0 40px #000a;
-  cursor: pointer;
-  text-align: center;
-  transition: background 0.2s;
-}
-
-#overlay-content:hover {
-  background: rgba(50, 50, 50, 1);
+  user-select: none;
 }
 
 audio {
@@ -124,7 +115,7 @@ h1#magnetic-title {
   width: 60px;
   height: 60px;
   pointer-events: none;
-  z-index: 10000;
+  z-index: 100000; /* higher than overlay */
 }
 
 .crosshair-dot {
