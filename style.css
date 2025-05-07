@@ -11,14 +11,10 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  cursor: none; /* Hide default cursor always */
 }
 
-body.overlay-active {
-  cursor: default;
-}
-body:not(.overlay-active) {
-  cursor: none;
-}
+/* Remove cursor hiding logic since crosshair is always visible */
 
 /* Overlay with smooth fade and blur */
 #overlay {
@@ -146,6 +142,7 @@ h1#magnetic-title {
   height: 60px;
   pointer-events: none;
   z-index: 100000;
+  cursor: none; /* Hide default cursor over crosshair */
 }
 
 .crosshair-dot {
@@ -216,8 +213,4 @@ h1#magnetic-title {
   to {
     transform: translate(-50%, -50%) rotate(360deg);
   }
-}
-
-.crosshair-container.hidden {
-  display: none;
 }
