@@ -1,10 +1,8 @@
-// No need to hide crosshair or show default cursor on load since crosshair is always visible
-
 // Overlay click to start music and fade out overlay/blur/text
 document.getElementById('overlay').addEventListener('click', function() {
   const audio = document.getElementById('bg-music');
 
-  // Play music on user interaction
+  audio.volume = 0.5; // Set volume to 50%
   audio.loop = true;
   audio.play().catch((e) => {
     console.log("Audio play failed:", e);
