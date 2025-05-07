@@ -238,23 +238,27 @@ h1#magnetic-title {
 }
 
 .discord-logo-box {
-  background: white;
+  background: #111;
   border-radius: 16px;
-  padding: 10px;
+  padding: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   box-sizing: border-box;
+  border: 3px solid #fff; /* White outline */
+  overflow: hidden; /* Ensures image never leaves the box */
 }
 
 .discord-logo {
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   display: block;
+  border-radius: 12px; /* Rounded corners for the image */
   filter: drop-shadow(0 0 2px #fff);
   animation: spinLogo 5s linear infinite;
+  object-fit: cover;
 }
 
 @keyframes spinLogo {
