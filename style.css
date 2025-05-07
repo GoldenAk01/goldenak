@@ -49,7 +49,8 @@ body {
   padding: 40px 60px;
   border-radius: 18px;
   box-shadow: 0 0 40px #000a;
-  font-size: 2rem;
+  font-size: 2.5rem; /* increased font size */
+  font-weight: 600;
   cursor: pointer;
   text-align: center;
   transition: background 0.2s;
@@ -201,4 +202,10 @@ h1#magnetic-title {
   to {
     transform: translate(-50%, -50%) rotate(360deg);
   }
+}
+
+/* Blur effect on page content when overlay is visible */
+#page-content.blur {
+  filter: blur(5px);
+  transition: filter 0.3s ease;
 }
