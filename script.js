@@ -1,10 +1,13 @@
 // Overlay click to start music and fade out overlay/blur/text
 document.getElementById('overlay').addEventListener('click', function() {
   const audio = document.getElementById('bg-music');
-
-  audio.volume = 0.1; // Set volume to 50%
   audio.loop = true;
-  audio.play().catch((e) => {
+
+  // Play audio, then set volume for best compatibility
+  audio.play().then(() => {
+    audio.volume = 0.2; // Set volume after playback starts
+  }).catch((e) => {
+    // If there's an error, log it (for debugging)
     console.log("Audio play failed:", e);
   });
 
