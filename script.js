@@ -2,7 +2,7 @@
 document.getElementById('overlay').addEventListener('click', function() {
   const audio = document.getElementById('bg-music');
 
-  audio.volume = 0.5; // Set volume to 50%
+  audio.volume = 0.2; // Set volume to 50%
   audio.loop = true;
   audio.play().catch((e) => {
     console.log("Audio play failed:", e);
