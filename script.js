@@ -46,9 +46,3 @@ document.addEventListener('mousemove', (e) => {
 document.addEventListener('mouseleave', () => {
   magneticTitle.style.transform = 'translate(-50%, -50%)';
 });
-
-// Fallback for broken image
-const pfp = document.getElementById('pfp');
-pfp.onerror = () => {
-  pfp.src = 'https://i.pravatar.cc/150';
-};
