@@ -18,7 +18,7 @@ document.addEventListener('mousemove', (e) => {
   mouseX = e.clientX;
 });
 
-// Snowflake creation function with drift
+// Snowflake creation function with snap drift
 function createSnowflake() {
   const snowflake = document.createElement("div");
   snowflake.classList.add("snowflake");
@@ -30,13 +30,21 @@ function createSnowflake() {
   const duration = Math.random() * 5 + 5;
   snowflake.style.animationDuration = duration + "s";
 
-  // Calculate drift amount based on mouse position
-  const center = window.innerWidth / 2;
-  const maxDrift = 120; // maximum left/right drift in px
-  const driftRatio = (mouseX - center) / center; // -1 (left) to 1 (right)
-  const drift = driftRatio * maxDrift * (0.5 + Math.random() * 0.5); // add some randomness
+  // Snap drift: strong left, strong right, or straight down
+  const width = window.innerWidth;
+  const leftZone = width / 3;
+  const rightZone = 2 * width / 3;
+  let drift = 0;
+  const strongDrift = 300 + Math.random() * 100; // 300-400px
 
-  // Animate with transform for drift
+  if (mouseX < leftZone) {
+    drift = -strongDrift; // strong left
+  } else if (mouseX > rightZone) {
+    drift = strongDrift; // strong right
+  } else {
+    drift = 0; // straight down
+  }
+
   snowflake.style.setProperty('--snow-drift', `${drift}px`);
 
   document.body.appendChild(snowflake);
