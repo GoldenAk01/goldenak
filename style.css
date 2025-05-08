@@ -286,3 +286,77 @@ h1#magnetic-title {
 #discord-copied.visible {
   opacity: 1;
 }
+
+/* Roblox Button Orbiting */
+#roblox-btn-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 10001;
+  pointer-events: auto;
+}
+
+#roblox-btn {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px #fff3;
+  transition: box-shadow 0.2s;
+}
+
+#roblox-btn:active {
+  box-shadow: 0 1px 4px #fff2;
+}
+
+.roblox-logo-box {
+  background: #111;
+  border-radius: 16px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  box-sizing: border-box;
+  border: 3px solid #fff; /* White outline */
+  overflow: hidden;
+}
+
+.roblox-logo {
+  width: 44px;
+  height: 44px;
+  display: block;
+  border-radius: 12px;
+  filter: drop-shadow(0 0 2px #fff);
+  animation: spinRoblox 7s linear infinite;
+  object-fit: cover;
+}
+
+@keyframes spinRoblox {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+
+#roblox-copied {
+  position: fixed;
+  left: 50%;
+  bottom: 48px;
+  transform: translateX(-50%);
+  background: #fff;
+  color: #222;
+  padding: 8px 20px;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s;
+  z-index: 10002;
+}
+
+#roblox-copied.visible {
+  opacity: 1;
+}
