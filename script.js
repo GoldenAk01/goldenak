@@ -12,16 +12,33 @@ document.getElementById('overlay').addEventListener('click', function() {
   }, 700);
 });
 
-// Snowflake creation function
+// Track mouse X for snow drift
+let mouseX = window.innerWidth / 2;
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+});
+
+// Snowflake creation function with drift
 function createSnowflake() {
   const snowflake = document.createElement("div");
   snowflake.classList.add("snowflake");
-  snowflake.style.left = Math.random() * window.innerWidth + "px";
+  const startLeft = Math.random() * window.innerWidth;
+  snowflake.style.left = startLeft + "px";
   const size = Math.random() * 4 + 2;
   snowflake.style.width = size + "px";
   snowflake.style.height = size + "px";
   const duration = Math.random() * 5 + 5;
   snowflake.style.animationDuration = duration + "s";
+
+  // Calculate drift amount based on mouse position
+  const center = window.innerWidth / 2;
+  const maxDrift = 120; // maximum left/right drift in px
+  const driftRatio = (mouseX - center) / center; // -1 (left) to 1 (right)
+  const drift = driftRatio * maxDrift * (0.5 + Math.random() * 0.5); // add some randomness
+
+  // Animate with transform for drift
+  snowflake.style.setProperty('--snow-drift', `${drift}px`);
+
   document.body.appendChild(snowflake);
   setTimeout(() => {
     snowflake.remove();
