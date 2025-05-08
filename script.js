@@ -38,20 +38,35 @@ function updateSnowDrift(e) {
 updateSnowDrift(); // Set initial value
 document.addEventListener('mousemove', updateSnowDrift);
 
-// Snowflake creation function (no per-flake drift)
+// Snowflake creation function (with bottom stick and despawn)
 function createSnowflake() {
   const snowflake = document.createElement("div");
   snowflake.classList.add("snowflake");
-  snowflake.style.left = Math.random() * window.innerWidth + "px";
+  const startLeft = Math.random() * window.innerWidth;
+  snowflake.style.left = startLeft + "px";
   const size = Math.random() * 4 + 2;
   snowflake.style.width = size + "px";
   snowflake.style.height = size + "px";
   const duration = Math.random() * 5 + 5;
   snowflake.style.animationDuration = duration + "s";
   document.body.appendChild(snowflake);
-  setTimeout(() => {
-    snowflake.remove();
-  }, duration * 1000);
+
+  // When animation ends, stick to bottom, then despawn after 2s
+  snowflake.addEventListener('animationend', () => {
+    // Calculate where the snowflake landed
+    const drift = parseFloat(getComputedStyle(document.body).getPropertyValue('--snow-drift')) || 0;
+    const finalLeft = startLeft + drift;
+    // Clamp to screen
+    const clampedLeft = Math.max(0, Math.min(finalLeft, window.innerWidth - size));
+    snowflake.style.left = clampedLeft + "px";
+    snowflake.style.top = (window.innerHeight - size) + "px";
+    snowflake.style.transform = "none";
+    snowflake.style.animation = "none";
+    // Wait 2 seconds, then remove
+    setTimeout(() => {
+      snowflake.remove();
+    }, 2000);
+  });
 }
 setInterval(createSnowflake, 100);
 
@@ -147,4 +162,3 @@ setupOrbitingCopyButton(
   0.07,
   Math.PI
 );
-
