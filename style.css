@@ -129,7 +129,7 @@ h1#magnetic-title {
 
 @keyframes fall {
   to {
-    transform: translateY(100vh) translateX(60px); /* gentle drift right */
+    transform: translateY(100vh) translateX(150px); /* gentle drift right */
   }
 }
 
