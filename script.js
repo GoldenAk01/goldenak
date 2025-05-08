@@ -12,41 +12,42 @@ document.getElementById('overlay').addEventListener('click', function() {
   }, 700);
 });
 
-// Track mouse X for snow drift
-let mouseX = window.innerWidth / 2;
-document.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX;
-});
+// --- SNOW DRIFT LOGIC: all snowflakes pulled at once ---
+function updateSnowDrift(e) {
+  let mouseX;
+  if (e && typeof e.clientX === "number") {
+    mouseX = e.clientX;
+  } else {
+    mouseX = window.innerWidth / 2;
+  }
+  const width = window.innerWidth;
+  const leftZone = width / 3;
+  const rightZone = 2 * width / 3;
+  let drift = 0;
+  const strongDrift = 400; // px
 
-// Snowflake creation function with snap drift
+  if (mouseX < leftZone) {
+    drift = -strongDrift; // pull left
+  } else if (mouseX > rightZone) {
+    drift = strongDrift; // pull right
+  } else {
+    drift = 0; // straight down
+  }
+  document.body.style.setProperty('--snow-drift', `${drift}px`);
+}
+updateSnowDrift(); // Set initial value
+document.addEventListener('mousemove', updateSnowDrift);
+
+// Snowflake creation function (no per-flake drift)
 function createSnowflake() {
   const snowflake = document.createElement("div");
   snowflake.classList.add("snowflake");
-  const startLeft = Math.random() * window.innerWidth;
-  snowflake.style.left = startLeft + "px";
+  snowflake.style.left = Math.random() * window.innerWidth + "px";
   const size = Math.random() * 4 + 2;
   snowflake.style.width = size + "px";
   snowflake.style.height = size + "px";
   const duration = Math.random() * 5 + 5;
   snowflake.style.animationDuration = duration + "s";
-
-  // Snap drift: strong left, strong right, or straight down
-  const width = window.innerWidth;
-  const leftZone = width / 3;
-  const rightZone = 2 * width / 3;
-  let drift = 0;
-  const strongDrift = 300 + Math.random() * 100; // 300-400px
-
-  if (mouseX < leftZone) {
-    drift = -strongDrift; // strong left
-  } else if (mouseX > rightZone) {
-    drift = strongDrift; // strong right
-  } else {
-    drift = 0; // straight down
-  }
-
-  snowflake.style.setProperty('--snow-drift', `${drift}px`);
-
   document.body.appendChild(snowflake);
   setTimeout(() => {
     snowflake.remove();
@@ -146,3 +147,4 @@ setupOrbitingCopyButton(
   0.07,
   Math.PI
 );
+
