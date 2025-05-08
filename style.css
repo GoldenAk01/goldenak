@@ -122,8 +122,9 @@ h1#magnetic-title {
   background: white;
   border-radius: 50%;
   opacity: 0.8;
-  animation: fall linear infinite;
+  animation: fall linear forwards;
   pointer-events: none;
+  transition: top 0.3s, left 0.3s;
 }
 
 @keyframes fall {
