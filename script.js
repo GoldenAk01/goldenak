@@ -12,33 +12,7 @@ document.getElementById('overlay').addEventListener('click', function() {
   }, 700);
 });
 
-// --- SNOW DRIFT LOGIC: all snowflakes pulled at once ---
-function updateSnowDrift(e) {
-  let mouseX;
-  if (e && typeof e.clientX === "number") {
-    mouseX = e.clientX;
-  } else {
-    mouseX = window.innerWidth / 2;
-  }
-  const width = window.innerWidth;
-  const leftZone = width / 3;
-  const rightZone = 2 * width / 3;
-  let drift = 0;
-  const strongDrift = 400; // px
-
-  if (mouseX < leftZone) {
-    drift = -strongDrift; // pull left
-  } else if (mouseX > rightZone) {
-    drift = strongDrift; // pull right
-  } else {
-    drift = 0; // straight down
-  }
-  document.body.style.setProperty('--snow-drift', `${drift}px`);
-}
-updateSnowDrift(); // Set initial value
-document.addEventListener('mousemove', updateSnowDrift);
-
-// Snowflake creation function (with bottom stick and despawn)
+// Snowflake creation function (fall straight down, stick, fade out)
 function createSnowflake() {
   const snowflake = document.createElement("div");
   snowflake.classList.add("snowflake");
@@ -51,21 +25,18 @@ function createSnowflake() {
   snowflake.style.animationDuration = duration + "s";
   document.body.appendChild(snowflake);
 
-  // When animation ends, stick to bottom, then despawn after 2s
+  // When animation ends, stick to bottom, wait 3s, then fade out and remove
   snowflake.addEventListener('animationend', () => {
-    // Calculate where the snowflake landed
-    const drift = parseFloat(getComputedStyle(document.body).getPropertyValue('--snow-drift')) || 0;
-    const finalLeft = startLeft + drift;
-    // Clamp to screen
-    const clampedLeft = Math.max(0, Math.min(finalLeft, window.innerWidth - size));
-    snowflake.style.left = clampedLeft + "px";
     snowflake.style.top = (window.innerHeight - size) + "px";
+    snowflake.style.left = startLeft + "px";
     snowflake.style.transform = "none";
     snowflake.style.animation = "none";
-    // Wait 2 seconds, then remove
     setTimeout(() => {
-      snowflake.remove();
-    }, 2000);
+      snowflake.style.opacity = "0";
+      setTimeout(() => {
+        snowflake.remove();
+      }, 1000); // match transition duration
+    }, 3000); // 3 seconds on the ground
   });
 }
 setInterval(createSnowflake, 100);
@@ -162,3 +133,4 @@ setupOrbitingCopyButton(
   0.07,
   Math.PI
 );
+
