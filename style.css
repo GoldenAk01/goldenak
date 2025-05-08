@@ -124,12 +124,12 @@ h1#magnetic-title {
   opacity: 0.8;
   animation: fall linear forwards;
   pointer-events: none;
-  transition: top 0.3s, left 0.3s;
+  transition: opacity 1s;
 }
 
 @keyframes fall {
   to {
-    transform: translateY(100vh) translateX(var(--snow-drift, 0px));
+    transform: translateY(100vh);
   }
 }
 
