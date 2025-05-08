@@ -50,42 +50,74 @@ document.addEventListener('mouseleave', () => {
   magneticTitle.style.transform = 'translate(-50%, -50%)';
 });
 
-// Discord button copy functionality
-document.getElementById('discord-btn').addEventListener('click', function() {
-  const discordName = "goldenak";
-  navigator.clipboard.writeText(discordName).then(() => {
-    const copied = document.getElementById('discord-copied');
-    copied.classList.add('visible');
-    setTimeout(() => {
-      copied.classList.remove('visible');
-    }, 1500);
+/**
+ * Creates an orbiting social button with copy-to-clipboard.
+ * @param {string} containerId - The ID for the orbiting button container (e.g. "discord-btn-container")
+ * @param {string} btnId - The ID for the button itself (e.g. "discord-btn")
+ * @param {string} copiedId - The ID for the "Copied!" message div (e.g. "discord-copied")
+ * @param {string} username - The username to copy to clipboard
+ * @param {number} orbitRadius - The orbit radius in pixels
+ * @param {number} orbitSpeed - The orbit speed (rotations per second)
+ * @param {number} orbitOffset - Angle offset in radians (e.g. 0 for Discord, Math.PI for Roblox)
+ */
+function setupOrbitingCopyButton(containerId, btnId, copiedId, username, orbitRadius, orbitSpeed, orbitOffset) {
+  const btnContainer = document.getElementById(containerId);
+  const btn = document.getElementById(btnId);
+  const copiedMsg = document.getElementById(copiedId);
+  const pfpContainer = document.querySelector('.pfp-container');
+  const magneticTitleElem = document.getElementById('magnetic-title');
+
+  // Copy functionality
+  btn.addEventListener('click', function() {
+    navigator.clipboard.writeText(username).then(() => {
+      copiedMsg.classList.add('visible');
+      setTimeout(() => {
+        copiedMsg.classList.remove('visible');
+      }, 1500);
+    });
   });
-});
 
-// Orbit animation for Discord button (bigger orbit)
-const discordBtnContainer = document.getElementById('discord-btn-container');
-const pfpContainer = document.querySelector('.pfp-container');
-const magneticTitleElem = document.getElementById('magnetic-title');
+  // Orbit animation
+  function animateOrbit() {
+    const now = Date.now() / 1000;
+    const angle = now * orbitSpeed * 2 * Math.PI + orbitOffset;
 
-function animateOrbit() {
-  const now = Date.now() / 1000;
-  const orbitRadius = 300; // Even bigger orbit!
-  const orbitSpeed = 0.01; // Really slow rotations per second
-  const angle = now * orbitSpeed * 2 * Math.PI;
+    // Center position (between pfp and title)
+    const pfpRect = pfpContainer.getBoundingClientRect();
+    const titleRect = magneticTitleElem.getBoundingClientRect();
+    const centerX = (pfpRect.left + titleRect.left + pfpRect.width/2 + titleRect.width/2) / 2 + window.scrollX;
+    const centerY = (pfpRect.top + titleRect.top + pfpRect.height/2 + titleRect.height/2) / 2 + window.scrollY;
 
-  // Center position (between pfp and title)
-  const pfpRect = pfpContainer.getBoundingClientRect();
-  const titleRect = magneticTitleElem.getBoundingClientRect();
-  const centerX = (pfpRect.left + titleRect.left + pfpRect.width/2 + titleRect.width/2) / 2 + window.scrollX;
-  const centerY = (pfpRect.top + titleRect.top + pfpRect.height/2 + titleRect.height/2) / 2 + window.scrollY;
+    // Orbit position
+    const x = centerX + orbitRadius * Math.cos(angle) - btnContainer.offsetWidth/2;
+    const y = centerY + orbitRadius * Math.sin(angle) - btnContainer.offsetHeight/2;
 
-  // Orbit position
-  const x = centerX + orbitRadius * Math.cos(angle) - discordBtnContainer.offsetWidth/2;
-  const y = centerY + orbitRadius * Math.sin(angle) - discordBtnContainer.offsetHeight/2;
+    btnContainer.style.left = `${x}px`;
+    btnContainer.style.top = `${y}px`;
 
-  discordBtnContainer.style.left = `${x}px`;
-  discordBtnContainer.style.top = `${y}px`;
-
-  requestAnimationFrame(animateOrbit);
+    requestAnimationFrame(animateOrbit);
+  }
+  animateOrbit();
 }
-animateOrbit();
+
+// Discord orbiting copy button
+setupOrbitingCopyButton(
+  "discord-btn-container",
+  "discord-btn",
+  "discord-copied",
+  "goldenak",
+  270,
+  0.07,
+  0
+);
+
+// Roblox orbiting copy button
+setupOrbitingCopyButton(
+  "roblox-btn-container",
+  "roblox-btn",
+  "roblox-copied",
+  "GoldenAk01",
+  270,
+  0.07,
+  Math.PI
+);
