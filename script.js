@@ -12,7 +12,7 @@ document.getElementById('overlay').addEventListener('click', function() {
   }, 700);
 });
 
-// Snowflake creation function (fall straight down, stick, fade out)
+// Snowflake creation function (fall gently to right, stick, fade out)
 function createSnowflake() {
   const snowflake = document.createElement("div");
   snowflake.classList.add("snowflake");
@@ -25,12 +25,16 @@ function createSnowflake() {
   snowflake.style.animationDuration = duration + "s";
   document.body.appendChild(snowflake);
 
-  // When animation ends, stick to bottom, wait 3s, then fade out and remove
   snowflake.addEventListener('animationend', () => {
+    // Land at the bottom with drift (60px right)
+    const drift = 60;
+    const finalLeft = startLeft + drift;
+    const clampedLeft = Math.max(0, Math.min(finalLeft, window.innerWidth - size));
+    snowflake.style.left = clampedLeft + "px";
     snowflake.style.top = (window.innerHeight - size) + "px";
-    snowflake.style.left = startLeft + "px";
     snowflake.style.transform = "none";
     snowflake.style.animation = "none";
+    // Stay for 3 seconds, then fade out and remove
     setTimeout(() => {
       snowflake.style.opacity = "0";
       setTimeout(() => {
@@ -133,4 +137,3 @@ setupOrbitingCopyButton(
   0.07,
   Math.PI
 );
-
