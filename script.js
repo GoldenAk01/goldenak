@@ -26,13 +26,8 @@ function createSnowflake() {
   document.body.appendChild(snowflake);
 
   snowflake.addEventListener('animationend', () => {
-    // Land at the bottom with drift (60px right)
-    const drift = 60;
-    const finalLeft = startLeft + drift;
-    const clampedLeft = Math.max(0, Math.min(finalLeft, window.innerWidth - size));
-    snowflake.style.left = clampedLeft + "px";
+    // Only set top to bottom, don't touch left or transform
     snowflake.style.top = (window.innerHeight - size) + "px";
-    snowflake.style.transform = "none";
     snowflake.style.animation = "none";
     // Stay for 3 seconds, then fade out and remove
     setTimeout(() => {
