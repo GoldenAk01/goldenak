@@ -26,14 +26,12 @@ function createSnowflake() {
   document.body.appendChild(snowflake);
 
   snowflake.addEventListener('animationend', () => {
-    // Don't change top, left, or transform; just remove animation and fade out in place
-    snowflake.style.animation = "none";
-    // Stay for 3 seconds, then fade out and remove
+    // Do NOT change animation, top, left, or transform; just fade out in place
     setTimeout(() => {
       snowflake.style.opacity = "0";
       setTimeout(() => {
         snowflake.remove();
-      }, 1000); // match transition duration
+      }, 1000); // fade duration
     }, 3000); // 3 seconds on the ground
   });
 }
