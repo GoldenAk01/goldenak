@@ -12,7 +12,7 @@ document.getElementById('overlay').addEventListener('click', function() {
   }, 700);
 });
 
-// Snowflake creation function (fall gently to right, stick, fade out)
+// Snowflake creation function (fall gently to right, fade out in place)
 function createSnowflake() {
   const snowflake = document.createElement("div");
   snowflake.classList.add("snowflake");
@@ -26,8 +26,7 @@ function createSnowflake() {
   document.body.appendChild(snowflake);
 
   snowflake.addEventListener('animationend', () => {
-    // Only set top to bottom, don't touch left or transform
-    snowflake.style.top = (window.innerHeight - size) + "px";
+    // Don't change top, left, or transform; just remove animation and fade out in place
     snowflake.style.animation = "none";
     // Stay for 3 seconds, then fade out and remove
     setTimeout(() => {
