@@ -26,12 +26,12 @@ function createSnowflake() {
   document.body.appendChild(snowflake);
 
   snowflake.addEventListener('animationend', () => {
-    // Get the snowflake's actual position on screen
+    // Get the snowflake's position on the screen
     const rect = snowflake.getBoundingClientRect();
-    // Set its left/top to its current position, relative to the viewport
-    snowflake.style.left = rect.left + window.scrollX + "px";
-    snowflake.style.top = rect.top + window.scrollY + "px";
-    // Remove transform and animation so it stays visually in place
+    // Freeze it in place using fixed positioning
+    snowflake.style.position = "fixed";
+    snowflake.style.left = rect.left + "px";
+    snowflake.style.top = rect.top + "px";
     snowflake.style.transform = "none";
     snowflake.style.animation = "none";
     // Now fade out after 4 seconds
