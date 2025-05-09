@@ -12,7 +12,7 @@ document.getElementById('overlay').addEventListener('click', function() {
   }, 700);
 });
 
-// Snowflake creation function (fall gently to right, fade out in place)
+// Snowflake creation function (fall gently to right, land, stay, fade out in place)
 function createSnowflake() {
   const snowflake = document.createElement("div");
   snowflake.classList.add("snowflake");
@@ -26,13 +26,21 @@ function createSnowflake() {
   document.body.appendChild(snowflake);
 
   snowflake.addEventListener('animationend', () => {
-    // Do NOT change animation, top, left, or transform; just fade out in place
+    // Get the snowflake's actual position on screen
+    const rect = snowflake.getBoundingClientRect();
+    // Set its left/top to its current position, relative to the viewport
+    snowflake.style.left = rect.left + window.scrollX + "px";
+    snowflake.style.top = rect.top + window.scrollY + "px";
+    // Remove transform and animation so it stays visually in place
+    snowflake.style.transform = "none";
+    snowflake.style.animation = "none";
+    // Now fade out after 4 seconds
     setTimeout(() => {
       snowflake.style.opacity = "0";
       setTimeout(() => {
         snowflake.remove();
       }, 1000); // fade duration
-    }, 3000); // 3 seconds on the ground
+    }, 4000); // 4 seconds on the ground
   });
 }
 setInterval(createSnowflake, 100);
