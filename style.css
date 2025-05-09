@@ -11,10 +11,9 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  cursor: none; /* Hide default cursor always */
+  cursor: none;
 }
 
-/* Overlay with smooth fade and blur */
 #overlay {
   position: fixed;
   z-index: 99999;
@@ -141,7 +140,7 @@ h1#magnetic-title {
   height: 60px;
   pointer-events: none;
   z-index: 100000;
-  cursor: none; /* Hide default cursor over crosshair */
+  cursor: none;
 }
 
 .crosshair-dot {
@@ -248,15 +247,15 @@ h1#magnetic-title {
   width: 56px;
   height: 56px;
   box-sizing: border-box;
-  border: 3px solid #fff; /* White outline */
-  overflow: hidden; /* Ensures image never leaves the box */
+  border: 3px solid #fff;
+  overflow: hidden;
 }
 
 .discord-logo {
   width: 44px;
   height: 44px;
   display: block;
-  border-radius: 12px; /* Rounded corners for the image */
+  border-radius: 12px;
   filter: drop-shadow(0 0 2px #fff);
   animation: spinLogo 5s linear infinite;
   object-fit: cover;
@@ -322,7 +321,7 @@ h1#magnetic-title {
   width: 56px;
   height: 56px;
   box-sizing: border-box;
-  border: 3px solid #fff; /* White outline */
+  border: 3px solid #fff;
   overflow: hidden;
 }
 
